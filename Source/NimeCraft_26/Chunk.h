@@ -5,11 +5,18 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Voxel.h"
+#include "Grass.h"
+#include "Cobble.h"
+#include "Coal.h"
+#include "Iron.h"
+#include "Gold.h"
+#include "Diamon.h"
 #include "Chunk.generated.h"
 
-constexpr int ChunkX = 5;
-constexpr int ChunkY = 5;
-constexpr int ChunkZ = 5;
+constexpr int ChunkX = 10;
+constexpr int ChunkY = 10;
+constexpr int ChunkZ = 20;
+
 
 
 

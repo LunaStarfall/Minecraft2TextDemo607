@@ -25,7 +25,8 @@ void AChunk::BeginPlay()
 	FVector VoxalScale = FVector(BaseVoxalMeasuement, BaseVoxalMeasuement, BaseVoxalMeasuement);
 
 	int VoxelCount = 0;
-
+	int GrassStart = ChunkZ - 2;
+	int DirtStart = ChunkZ/3;
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, FString::Printf(TEXT("Hello, this is the chunk")));
 
 
