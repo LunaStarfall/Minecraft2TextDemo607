@@ -18,6 +18,7 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Mesh")
 	TObjectPtr<UMaterial> Grass;
 
+	
 
 public:
 

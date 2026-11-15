@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "InteractionInterfact.h"
 #include "NimeCraft_26Character.generated.h"
 
 class UInputComponent;
@@ -48,6 +49,9 @@ protected:
 	/** Mouse Look Input Action */
 	UPROPERTY(EditAnywhere, Category ="Input")
 	class UInputAction* MouseLookAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* MineAction;
 	
 public:
 	ANimeCraft_26Character();
@@ -75,6 +79,14 @@ protected:
 	/** Handles jump end inputs from either controls or UI interfaces */
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoJumpEnd();
+
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	void DoMineStart();
+
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	void DoMineEnd();
+
+	void TraceFoward();
 
 protected:
 

@@ -25,8 +25,9 @@ void AChunk::BeginPlay()
 	FVector VoxalScale = FVector(BaseVoxalMeasuement, BaseVoxalMeasuement, BaseVoxalMeasuement);
 
 	int VoxelCount = 0;
-	int GrassStart = ChunkZ - 2;
-	int DirtStart = ChunkZ/3;
+	int GrassStart = 28;
+	int DirtStart = 25;
+	int layerPrinted = 0;
 	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, FString::Printf(TEXT("Hello, this is the chunk")));
 
 
@@ -36,7 +37,84 @@ void AChunk::BeginPlay()
 		{
 			for (int i = 0; i < ChunkX; i++)
 			{
-				Chunk[i][j][k] = GetWorld()->SpawnActor<AVoxel>(SpawnLoc, SpawnRot, SpawnParams);
+				if (layerPrinted > GrassStart)
+				{
+					Chunk[i][j][k] = GetWorld()->SpawnActor<AGrass>(SpawnLoc, SpawnRot, SpawnParams);
+				}
+				else if (layerPrinted > DirtStart)
+				{
+					Chunk[i][j][k] = GetWorld()->SpawnActor<AVoxel>(SpawnLoc, SpawnRot, SpawnParams);
+				}
+				else
+
+					if (layerPrinted > 20)
+					{
+
+						if (rand() % 10 == 1)
+						{
+							Chunk[i][j][k] = GetWorld()->SpawnActor<ACoal>(SpawnLoc, SpawnRot, SpawnParams);
+						}
+						else if (rand() % 50 == 1)
+						{
+							Chunk[i][j][k] = GetWorld()->SpawnActor<AIron>(SpawnLoc, SpawnRot, SpawnParams);
+						}
+						else if (rand() % 500 == 1)
+						{
+							Chunk[i][j][k] = GetWorld()->SpawnActor<AGold>(SpawnLoc, SpawnRot, SpawnParams);
+						}
+						else if (rand() % 1000 == 1)
+						{
+							Chunk[i][j][k] = GetWorld()->SpawnActor<ADiamon>(SpawnLoc, SpawnRot, SpawnParams);
+						}
+						else
+							Chunk[i][j][k] = GetWorld()->SpawnActor<ACobble>(SpawnLoc, SpawnRot, SpawnParams);
+					}
+
+					else if (layerPrinted > 10)
+
+					{
+
+						if (rand() % 20 == 1)
+						{
+							Chunk[i][j][k] = GetWorld()->SpawnActor<ACoal>(SpawnLoc, SpawnRot, SpawnParams);
+						}
+						else if (rand() % 30 == 1)
+						{
+							Chunk[i][j][k] = GetWorld()->SpawnActor<AIron>(SpawnLoc, SpawnRot, SpawnParams);
+						}
+						else if (rand() % 100 == 1)
+						{
+							Chunk[i][j][k] = GetWorld()->SpawnActor<AGold>(SpawnLoc, SpawnRot, SpawnParams);
+						}
+						else if (rand() % 500 == 1)
+						{
+							Chunk[i][j][k] = GetWorld()->SpawnActor<ADiamon>(SpawnLoc, SpawnRot, SpawnParams);
+						}
+						else
+							Chunk[i][j][k] = GetWorld()->SpawnActor<ACobble>(SpawnLoc, SpawnRot, SpawnParams);
+					}
+
+					else
+
+					if (rand() % 50 == 1)
+
+					{
+						Chunk[i][j][k] = GetWorld()->SpawnActor<ACoal>(SpawnLoc, SpawnRot, SpawnParams);
+					}
+					else if (rand() % 10 == 1)
+					{
+						Chunk[i][j][k] = GetWorld()->SpawnActor<AIron>(SpawnLoc, SpawnRot, SpawnParams);
+					}
+					else if (rand() % 20 == 1)
+					{
+						Chunk[i][j][k] = GetWorld()->SpawnActor<AGold>(SpawnLoc, SpawnRot, SpawnParams);
+					}
+					else if (rand() % 50 == 1)
+					{
+						Chunk[i][j][k] = GetWorld()->SpawnActor<ADiamon>(SpawnLoc, SpawnRot, SpawnParams);
+					}
+					else
+					Chunk[i][j][k] = GetWorld()->SpawnActor<ACobble>(SpawnLoc, SpawnRot, SpawnParams);
 
 				Chunk[i][j][k]->SetActorScale3D(VoxalScale);
 
@@ -49,6 +127,7 @@ void AChunk::BeginPlay()
 		}
 		SpawnLoc.Y -= ChunkY* (BaseVoxalMeasuement * 100);
 		SpawnLoc.Z += (BaseVoxalMeasuement * 100);
+		layerPrinted++;
 	}
 	
 

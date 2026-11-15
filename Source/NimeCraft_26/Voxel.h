@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "InteractionInterfact.h"
 #include "Voxel.generated.h"
 
 UCLASS()
-class NIMECRAFT_26_API AVoxel : public AActor
+class NIMECRAFT_26_API AVoxel : public AActor, public IInteractionInterfact
 {
 	GENERATED_BODY()
 	
@@ -24,6 +25,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Mesh")
 	TObjectPtr<UMaterial> BaseVoxelMat;
+
+	UFUNCTION()
+	virtual void PlayerInteract() override;
 
 
 public:	

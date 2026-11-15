@@ -13,9 +13,9 @@
 #include "Diamon.h"
 #include "Chunk.generated.h"
 
-constexpr int ChunkX = 10;
-constexpr int ChunkY = 10;
-constexpr int ChunkZ = 20;
+constexpr int ChunkX = 20;
+constexpr int ChunkY = 20;
+constexpr int ChunkZ = 30;
 
 
 

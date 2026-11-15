@@ -38,6 +38,13 @@ void AVoxel::BeginPlay()
 	
 }
 
+void AVoxel::PlayerInteract()
+{
+	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, TEXT("Owwm, I have been hit"));
+
+	Destroy();
+}
+
 // Called every frame
 void AVoxel::Tick(float DeltaTime)
 {

@@ -59,6 +59,10 @@ void ANimeCraft_26Character::SetupPlayerInputComponent(UInputComponent* PlayerIn
 		// Looking/Aiming
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ANimeCraft_26Character::LookInput);
 		EnhancedInputComponent->BindAction(MouseLookAction, ETriggerEvent::Triggered, this, &ANimeCraft_26Character::LookInput);
+
+		// Mining
+		EnhancedInputComponent->BindAction(MineAction, ETriggerEvent::Started, this, &ANimeCraft_26Character::DoMineStart);
+		EnhancedInputComponent->BindAction(MineAction, ETriggerEvent::Completed, this, &ANimeCraft_26Character::DoMineEnd);
 	}
 	else
 	{
@@ -124,4 +128,47 @@ void ANimeCraft_26Character::DoJumpEnd()
 {
 	// pass StopJumping to the character
 	StopJumping();
+}
+
+void ANimeCraft_26Character::DoMineStart()
+{
+	if (GEngine) GEngine->AddOnScreenDebugMessage(5, 2.f, FColor::Yellow, FString::Printf(TEXT("Mining!")));
+
+	TraceFoward();
+}
+
+void ANimeCraft_26Character::DoMineEnd()
+{
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(5, 2.f, FColor::Red, FString::Printf(TEXT("Stop Mining!")));
+}
+
+void ANimeCraft_26Character::TraceFoward()
+{
+	FVector PlayerLocation;
+	FRotator PlayerRotation;
+
+	GetController()->GetPlayerViewPoint(PlayerLocation, PlayerRotation);
+
+	FVector LineTraceStart = PlayerLocation;
+	FVector LineTraceEnd = LineTraceStart + (PlayerRotation.Vector() * 400);
+	FHitResult HitByLineTrace;
+	FCollisionQueryParams LinetraceParams;
+	bool bHit;
+
+	bHit = GetWorld()->LineTraceSingleByChannel(HitByLineTrace, LineTraceStart, LineTraceEnd, ECC_Visibility, LinetraceParams);
+	
+	DrawDebugLine(GetWorld(), LineTraceStart, LineTraceEnd, FColor::Red, false, 2.0f);
+
+	if (bHit)
+	{
+		if (GEngine) GEngine->AddOnScreenDebugMessage(5, 2.0f, FColor::Red, FString::Printf(TEXT("You hit %s"), *HitByLineTrace.GetActor()->GetName()));
+
+		DrawDebugBox(GetWorld(), HitByLineTrace.ImpactPoint, FVector(5, 5, 5), FColor::Red, false, 2.0f);
+
+		if (HitByLineTrace.GetActor()->GetClass()->ImplementsInterface(UInteractionInterfact::StaticClass()))
+		{
+			Cast<IInteractionInterfact>(HitByLineTrace.GetActor())->PlayerInteract();
+			
+		}
+	}
 }
