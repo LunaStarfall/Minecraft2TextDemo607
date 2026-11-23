@@ -28,7 +28,7 @@ void AChunk::BeginPlay()
 	int GrassStart = 28;
 	int DirtStart = 25;
 	int layerPrinted = 0;
-	if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, FString::Printf(TEXT("Hello, this is the chunk")));
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, FString::Printf(TEXT("Hello, this is the chunk")));
 
 
 	for (int k = 0; k < ChunkZ; k++)
@@ -43,7 +43,7 @@ void AChunk::BeginPlay()
 				}
 				else if (layerPrinted > DirtStart)
 				{
-					Chunk[i][j][k] = GetWorld()->SpawnActor<AVoxel>(SpawnLoc, SpawnRot, SpawnParams);
+					Chunk[i][j][k] = GetWorld()->SpawnActor<ADirt>(SpawnLoc, SpawnRot, SpawnParams);
 				}
 				else
 
@@ -131,8 +131,8 @@ void AChunk::BeginPlay()
 	}
 	
 
-	if (GEngine) GEngine->AddOnScreenDebugMessage(4, 10.f, FColor::Black,
-		FString::Printf(TEXT("We have %d number of Voxels"), VoxelCount));
+	/*if (GEngine) GEngine->AddOnScreenDebugMessage(4, 10.f, FColor::Black,
+		FString::Printf(TEXT("We have %d number of Voxels"), VoxelCount));*/
 }
 
 // Called every frame

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Voxel.h"
+#include "Dirt.h"
 #include "Grass.h"
 #include "Cobble.h"
 #include "Coal.h"

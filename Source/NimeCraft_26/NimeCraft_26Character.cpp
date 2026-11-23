@@ -79,7 +79,7 @@ void ANimeCraft_26Character::MoveInput(const FInputActionValue& Value)
 	// pass the axis values to the move input
 	DoMove(MovementVector.X, MovementVector.Y);
 
-	if (GEngine) GEngine->AddOnScreenDebugMessage(1, 2.f, FColor::Green, FString::Printf(TEXT("I'm Moving!")));
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(1, 2.f, FColor::Green, FString::Printf(TEXT("I'm Moving!")));
 	
 
 }
@@ -92,7 +92,7 @@ void ANimeCraft_26Character::LookInput(const FInputActionValue& Value)
 	// pass the axis values to the aim input
 	DoAim(LookAxisVector.X, LookAxisVector.Y);
 
-	if (GEngine) GEngine->AddOnScreenDebugMessage(2, 2.f, FColor::Cyan, FString::Printf(TEXT("I'm Looking!")));
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(2, 2.f, FColor::Cyan, FString::Printf(TEXT("I'm Looking!")));
 
 }
 
@@ -121,7 +121,7 @@ void ANimeCraft_26Character::DoJumpStart()
 	// pass Jump to the character
 	Jump();
 
-	if (GEngine) GEngine->AddOnScreenDebugMessage(3, 2.f, FColor::Magenta, FString::Printf(TEXT("I'm Jumping!")));
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(3, 2.f, FColor::Magenta, FString::Printf(TEXT("I'm Jumping!")));
 }
 
 void ANimeCraft_26Character::DoJumpEnd()
@@ -132,7 +132,7 @@ void ANimeCraft_26Character::DoJumpEnd()
 
 void ANimeCraft_26Character::DoMineStart()
 {
-	if (GEngine) GEngine->AddOnScreenDebugMessage(5, 2.f, FColor::Yellow, FString::Printf(TEXT("Mining!")));
+	//if (GEngine) GEngine->AddOnScreenDebugMessage(5, 2.f, FColor::Yellow, FString::Printf(TEXT("Mining!")));
 
 	TraceFoward();
 }
@@ -157,13 +157,13 @@ void ANimeCraft_26Character::TraceFoward()
 
 	bHit = GetWorld()->LineTraceSingleByChannel(HitByLineTrace, LineTraceStart, LineTraceEnd, ECC_Visibility, LinetraceParams);
 	
-	DrawDebugLine(GetWorld(), LineTraceStart, LineTraceEnd, FColor::Red, false, 2.0f);
+	//DrawDebugLine(GetWorld(), LineTraceStart, LineTraceEnd, FColor::Red, false, 2.0f);
 
 	if (bHit)
 	{
-		if (GEngine) GEngine->AddOnScreenDebugMessage(5, 2.0f, FColor::Red, FString::Printf(TEXT("You hit %s"), *HitByLineTrace.GetActor()->GetName()));
+		//if (GEngine) GEngine->AddOnScreenDebugMessage(5, 2.0f, FColor::Red, FString::Printf(TEXT("You hit %s"), *HitByLineTrace.GetActor()->GetName()));
 
-		DrawDebugBox(GetWorld(), HitByLineTrace.ImpactPoint, FVector(5, 5, 5), FColor::Red, false, 2.0f);
+		//DrawDebugBox(GetWorld(), HitByLineTrace.ImpactPoint, FVector(5, 5, 5), FColor::Red, false, 2.0f);
 
 		if (HitByLineTrace.GetActor()->GetClass()->ImplementsInterface(UInteractionInterfact::StaticClass()))
 		{
